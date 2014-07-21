@@ -1,0 +1,12 @@
+# Site settings
+title: Stephens' home
+email: stephensxub@gmail.com
+description: "Copyright &copy; 2014 Stephens Xu"
+baseurl: ""
+url: "http://localhost:4000"
+twitter_username: stephensxu1
+github_username:  stephensxu
+
+# Build settings
+markdown: kramdown
+permalink: pretty

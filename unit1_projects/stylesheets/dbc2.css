@@ -1,0 +1,75 @@
+body {
+	background-color: #b0c4de;
+}
+
+a:link {color:red;}    
+a:visited {color:green;} 
+a:hover {color:purple;}   
+a:active {color:blue;} 
+
+[data-icon]:before {
+	font-family: icons;
+	content: attr(data-icon);
+	speak:none;
+}
+
+.icon-along {
+	display: inline-block;
+}
+
+.screen-reader-text {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+.sidebar {
+	position:absolute;
+	float: left;
+	top:0; bottom:0; left:0;
+	width:100px;
+	height: 1400px;
+	background-color: blue
+}
+
+.container {
+	position: relative;
+	float: middle;
+	width: 600px;
+	height: 1200px;
+	padding: 50px 50px;
+	border: 50px solid green;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#content {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	padding-right: 200px;
+	background-color: grey;
+}
+
+#image {
+	z-index: 1;
+	position: absolute;
+}
+
+#image:before {
+	content: "#####";
+	border: solid 1px black;
+	padding: 2px;
+	margin: 0 10px 0 0;
+}
+
+#image:after {
+	content: "$$$$$";
+}
+
+#text {
+	z-index: 100;
+	position: absolute;
+	left:70px;
+	top:150px;
+}

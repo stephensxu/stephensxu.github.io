@@ -1,0 +1,18 @@
+---
+layout: post
+title:  Object Oriented Programming VS. Procedural Programming
+date:   2014-06-08
+categories: technical
+---
+
+ What is the major differences between Object Oriented Programming and Procedural Programming?
+
+ Procedural programming, also called imperative programming, is one of the earliest programming methods. They are mostly centered on "actions", composed of lists of routines, subroutines, methods or functions. It is a detailed instruction telling the computer to perform certain task step by step, from beginning to end. Example of Procedural programmings include C, C++, BASIC etc.
+
+ Object-oriented programming(OOP) is a language model organized around "objects" instead of "actions". It's cernters on data rather than logic. Objects, usually instances of classes, are used to interact with one another to form applications. Programs built by OOP are simply a huge network of "objects" connected with each other and interact by sending messages to each-other. Example of OOP include Ruby, Objective-C, Python, PHP etc.
+
+ So how are they different? The most important distinction between those two programming types is that procedural programming uses procedures to operate on data structures, while OOP combines data and procedures into an "object", and the "object" operates on its own data structure. Procedureal programming is preferred for general purpose programming, easier to learn and can be used to build a large variety of applications. OOP is good for complex  and large scale applications that requires different type of interactions between large sets of data. OOP is easire to maintian and modify, provides a good framework for code libraries where supplied software components can be easily adapted and modified by the programmer. This is particularly useful for developing graphical user interfaces.
+
+ Questions? Email me at stephensxub@gmail.com.
+
+ <a href="{{ site.url }}/index.html">Back Home</a>

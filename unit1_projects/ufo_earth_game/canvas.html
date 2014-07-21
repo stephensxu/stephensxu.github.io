@@ -1,0 +1,80 @@
+<canvas id="ctx" width="900" height="700" style="border:5px solid #000000;"></canvas>
+
+<script>
+
+var ctx = document.getElementById("ctx").getContext("2d");
+// var imageObj = document.getElementById("ufo");
+var ufo = new Image();
+ufo.src = "images/ufo.jpg"
+
+ufo.onload = function () {
+    ctx.drawImage(ufo, 50, 50);
+};
+
+var earth = new Image();
+earth.src = "images/earth_crop.png"
+
+earth.onload = function () {
+    ctx.drawImage(earth, 700, 600);
+};
+
+ctx.font = "30px Arial";
+ctx.globalAlpha = 0.9;
+
+ctx.fillStyle = "blue";
+ctx.fillRect(50, 150, 50, 500);
+ctx.fillRect(50, 150, 500, 50);
+ctx.fillRect(700, 150, 50, 300);
+ctx.fillRect(300, 400, 400, 50);
+ctx.fillRect(300, 450, 50, 100);
+// ctx.clearRect(75,75,100,100);
+
+
+var x = 50;
+var spdX = 100;
+var y = 50
+var spdY = 80;
+
+var lossMessage = "You crashed in a wall and DIED!"
+
+// ctx.fillText("P", x, y);
+
+function moveRight() {
+	x += spdX;
+    // y += spdY;
+    ctx.drawImage(ufo, x, y);
+    if ( (x < 50 || x > 850) || (y < 0 || y > 650) ) {
+    	alert(lossMessage);
+    }
+    console.log ("position x:" + x + " position y:" + y);
+}
+function moveLeft() {
+	x -= spdX;
+    // y += spdY;
+    ctx.drawImage(ufo, x, y);
+    if ( (x < 50 || x > 850) || (y < 0 || y > 650) ) {
+    	alert(lossMessage);
+    }
+    console.log("position x:" + x + " position y:" + y);
+}
+function moveUp() {
+	// x -= spdX;
+    y -= spdY;
+    ctx.drawImage(ufo, x, y);
+    if ( (x < 50 || x > 850) || (y < 0 || y > 650) ) {
+    	alert(lossMessage);
+    }
+    console.log("position x:" + x + " position y:" + y);
+}
+function moveDown() {
+	// x -= spdX;
+    y += spdY;
+    ctx.drawImage(ufo, x, y);
+    if ( (x < 50 || x > 850) || (y < 0 || y > 650) ) {
+    	alert(lossMessage);
+    }
+    console.log("position x:" + x + " position y:" + y);
+}
+
+// setInterval(update, 500);
+</script>
