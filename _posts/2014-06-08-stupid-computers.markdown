@@ -21,4 +21,4 @@ So what is the solution? I believe the current development in Artificial Intelli
 
 <img src="{{ site.url }}/images/smart_robot.jpg" height="400" width="600" alt="">
 
-<a href="{{ site.url }}">Back Home</a>
+<a href="{{ site.url }}/index.html">Back Home</a>
