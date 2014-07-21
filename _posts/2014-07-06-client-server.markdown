@@ -19,4 +19,4 @@ So that's basically a very high level overview of how client-server model works.
 
 Questions? Email me at stephensxub@gmail.com.
 
-<a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

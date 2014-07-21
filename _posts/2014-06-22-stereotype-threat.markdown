@@ -23,4 +23,4 @@ Stereotyping have always been used as a barrier to stop other people to pursue d
 
 Do not believe in it.
 
-<a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

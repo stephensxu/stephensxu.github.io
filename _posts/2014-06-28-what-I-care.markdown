@@ -19,4 +19,4 @@ I believe there are countless brilliant technology being invented on a daily bas
 
 Questions? Email me at stephensxub@gmail.com.
 
-<a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

@@ -15,4 +15,4 @@ Computers are stubborn; most of the time they do what you tell them to do and th
 
 This is why pair-programming is important. Pair-programming is a process when we try to be both emotionally and intellectually connected with another human being. It is a process when we can develop a team-chemistry and work more efficiently. Yes, sometimes it could be frustrating that my pair is somewhat behind on his technical knowledge and unable to grasp my logic, or my pair is way too advanced and going at a speed I cannot catch-up. But I believe being humble and honest is the best way to resolve our differences. Just be honest and tell my pair what I am thinking, what I am feeling. By being open and honest we eliminate misunderstandings. Pairing is caring; after-all, computers are not the most important things, human are. Any invention of technology is here to help improve our lives, to make our life happier, and to make human live at peace and harmony with each other.
 
-<a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

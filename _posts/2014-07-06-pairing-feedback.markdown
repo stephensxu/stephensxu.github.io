@@ -17,4 +17,4 @@ Overall, I think the process of paring and feedback have been helpful for me to 
 
 Questions? Email me at stephensxub@gmail.com
 
- <a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

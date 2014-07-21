@@ -24,4 +24,4 @@ Techcrunch is the most popular tech-blogging website in the World. There are man
 
 The site design really focuses on how to let user view article topics, understand the core argument of the article, and move on to next topic without having to touch the mouse, type or click anything. If I want to read certain article in details, I can click in the specific article, otherwise I can view multiple article in a short period of time while still understanding the important information in that article. So how do I feel after spending time on the site? Happy and accomplished!
 
- <a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

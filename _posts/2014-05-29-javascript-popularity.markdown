@@ -13,4 +13,4 @@ With that said, is JavaScript good or bad? Well, that's really a personaly judgm
 
 Questions? Email me at stephensxub@gmail.com.
 
- <a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>

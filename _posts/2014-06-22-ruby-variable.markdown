@@ -29,4 +29,4 @@ Local variable in Ruby begin with lower case letter. They have the smallest scop
 
 Questions? Email me at stephensxub@gmail.com.
 
-<a href="{{ site.url }}/index.html">Back Home</a>
+<a href="{{ site.url }}">Back Home</a>
