@@ -412,25 +412,3 @@ a:visited { color: #205caa; }
     margin: 0 0 15px; }
 
 }
-
-#intro {
-  /*margin-top: 2%;*/
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
-  /*padding-left: 5%;*/
-  /*padding-right: 5%;*/
-  font-size: 30px;
-  color: black;
-  font-weight: bold;
-  font-style: italic;
-  color: #667CD4;
-  line-height: 1.7;
-}
-
-#myself_image {
-  margin-top: 3%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  height: 20%;
-}
