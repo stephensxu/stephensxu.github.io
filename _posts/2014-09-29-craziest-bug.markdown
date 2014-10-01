@@ -5,11 +5,9 @@ date:   2014-09-29
 categories: technical
 ---
 
-Bugs are common companions for web developers, it’s as if they live and die with us.
+I started learning how to program on Jan 14th, 2014 and have never written a single line of code before that. I met Jesse Farmer in May, and joined his workshops when he was just starting his venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a unique learning platform for web development and software engineering. Of all the black magics in programming, one of the most important lessons I've learned is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse have stressed the importance of this skill time after time. Today I want to tell you one of the craziest story along my journey.
 
-I'm a novice, I've been learning web development from Jesse Farmer. Some of my previous challenges were mostly result of inexperience, but this particular bug is definitely one of its kind, for once I've experienced a bug in a core piece of software and I think it’s worth writing about. 
-
-So I was building a website called <a href="http://couchfoodie.herokuapp.com" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno. 
+I was building a website called <a href="http://couchfoodie.herokuapp.com" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
 
 Two days ago I started to test photo uploading feature on my iphone5 by browsing the site with iOS Safari and found a problem where the server always times out with photo upload:
 
@@ -91,7 +89,7 @@ Now we’ve gotten to the bottom of the issue, we know that for some reason iOS 
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/ios_8.0.2_update_notes.png" height="382" width="750">
 
-Oh well. Had I read this upgrade notes before going through all these hustles, maybe it would have saved efforts; but if time reverse back I’d rather to go through this process again. This was a great opportunity for me to learn how to use a proxy server for debugging purpose, to do some in-depth analysis of HTTP request and response cycle, and to learn one of my most important lessons in web development so far. I hope you find this useful as well.
+Oh well. Had I read this upgrade notes before going through all these hustles, maybe it would have saved efforts; but if time reverse back I’d rather to go through this process again. This was a great opportunity for me to learn how to use a proxy server for debugging purpose and in-depth analysis of HTTP request and response cycle. Most importantly, this turned into one of the most memorable moment in my journey. I hope you find this useful as well.
 
 Questions? Email me at stephensxub@gmail.com
 
