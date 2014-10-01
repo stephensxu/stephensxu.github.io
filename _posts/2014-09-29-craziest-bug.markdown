@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  My craziest bug in web development(and the funniest one)
+title:  My craziest bug in web development (and the funniest one)
 date:   2014-09-29
 categories: technical
 ---
@@ -25,7 +25,7 @@ First I thought the server might have timed out due to file size was too big. So
 
 Nope, still same result. That’s weird! I was certain that the same photo, uploading with same network connection worked fine with desktop chrome uploading. “It must be mobile!” it’s yelling in my head. Jesse warned me to not make conclusion prematurely and instead tried to figure out at what stage did the server timeout. I did that by wrapping my photo#create method in photos_controller with a bench method like so:
 
-{% highlight ruby linenos %}
+{% highlight ruby %}
 
 def bench(label)
  t0 = Time.now
@@ -65,7 +65,7 @@ Before I went that route, I asked Jesse to perform the same upload action with s
 
 Both me and Jesse were very curious about the root cause of this issue. So we decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone http traffics, open up the hood and see what exactly is going on with the upload request.
 
-We decided to use <a href="http://mitmproxy.org/index.html">mitmproxy</a>, since Charles proxy isn’t free. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/">here</a>.
+We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitmproxy</a>, since Charles proxy isn’t free. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/" target="_blank">here</a>.
 
 Now I’m armed with a rather powerful tool which would give me much deeper visibility into the conversation between the iphone browser and my server, we’re ready to investigate!
 
