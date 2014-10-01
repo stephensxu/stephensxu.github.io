@@ -49,11 +49,11 @@ So now I know that the request data never got to my photos_controller and, most 
 
 Next, I conducted experiments in varies different conditions:
 
-Switched my web server from WEBrick to Thin: No.
+- Thinking it might be my web server, I switched my web server from WEBrick to Thin: **No**
 
-iOS upload with LTE network: No.
+- Thinking it might be my Wif-fi network, I tried to upload with ceelular LTE network: **No**
 
-iOS chrome browser upload: small photo Yes. Large photo No.
+- Thinking it might be Safari, I tried iOS chrome browser upload: small photo **Yes**, Large photo **No**
 
 Finally, I tried to upload photo with the xcode iOS simulator Safari browser. Everything worked perfectly fine in the xcode simulator, with same photo and same network connection, while failing on iphone iOS upload. Whaaaat? In theory iOS simulator has amlost identical environment configuration as a real iphone.
 
