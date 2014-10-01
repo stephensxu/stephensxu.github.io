@@ -38,7 +38,7 @@ def bench(label)
  result
 end
 
-bench("photoscontroller#create) { @photo = @kitchen.photos.build(photo_params) }
+bench("photos_controller#create) { @photo = @kitchen.photos.build(photo_params) }
 
 {% endhighlight %}
 
@@ -51,11 +51,11 @@ Next, I conducted experiments in varies different conditions:
 
 - Thinking it might be my web server, I switched my web server from WEBrick to Thin: **No**
 
-- Thinking it might be my Wif-fi network, I tried to upload with ceelular LTE network: **No**
+- Thinking it might be my Wi-fi network, I tried to upload with cellular LTE network: **No**
 
 - Thinking it might be Safari, I tried iOS chrome browser upload: small photo **Yes**, Large photo **No**
 
-Finally, I tried to upload photo with the xcode iOS simulator Safari browser. Everything worked perfectly fine in the xcode simulator, with same photo and same network connection, while failing on iphone iOS upload. Whaaaat? In theory iOS simulator has amlost identical environment configuration as a real iphone.
+Finally, I tried to upload photo with the xcode iOS simulator Safari browser. Everything worked perfectly fine in the xcode simulator, with same photo and same network connection, while failing on iphone iOS upload. Whaaaat? In theory iOS simulator has almost identical environment configuration as a real iphone.
 
 Those inconsistent results made it really hard to isolate the problem. It seems I'd have to intercept requests sent by my iphone and look at header and body of the request to find some clues.
 
@@ -63,13 +63,13 @@ Before I went that route, I asked Jesse to perform the same upload action with s
 
 Jesse was on iOS 8.0.2 and I was on iOS 8.0. Later that night I tried with an iphone running on iOS 7, an ipad mini and a Samsung galaxy SIII; they all worked fine. It became apparent that the timeout problem was unique to my phone only. But which configuration could have caused the difference? What if other people have the same configuration with me and go through same experiences when uploading photo?
 
-We decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone http traffics. Since Heroku logs wasn't providing me enouph information on what went wrong, I need an alternative to access the request sent by my phone BEFORE it even reaches heroku.
+We decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone HTTP traffics. Since Heroku logs wasn't providing me enough information on what went wrong, I need an alternative to access the request sent by my phone BEFORE it even reaches heroku.
 
-We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitmproxy</a>. Mitmproxy is a "man-in-the-middle" proxy server. As its name suggested, mitmproxy allows me to insert one more layer of server between my iphone and heroku server. Once installed, I'd need to manually configure my iphone to connect to this proxy server over wifi. Mitmproxy will be running on my desktop on port 8080. It will capture all HTTP traffics going in and out of my iphone. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/" target="_blank">here</a>.
+We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitmproxy</a>. Mitmproxy is a "man-in-the-middle" proxy server. As its name suggested, mitmproxy allows me to insert one more layer of server between my iphone and heroku server. Once installed, I'd need to manually configure my iphone to connect to this proxy server over Wi-Fi. Mitmproxy will be running on my desktop on port 8080. It will capture all HTTP traffics going in and out of my iphone. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/" target="_blank">here</a>.
 
 Now I’m armed with a rather powerful tool which would give me much deeper visibility into the conversation between the iphone browser and my server, we’re ready to investigate!
 
-First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. Mitmproxy would capture HTTP traffics, displaying the GET and POST requets as a list like so:
+First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. Mitmproxy would capture HTTP traffics, displaying the GET and POST request as a list like so:
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/request_list.png" height="212" width="750" alt="">
 
@@ -81,11 +81,11 @@ Everything looked normal at first glance. But notice that the body of the reques
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/ios8.0_safari_upload_http_response.png" height="454" width="750">
 
-So indeed there is a response from the server, with a x-Runtime of 2.02 seconds to generate the response. This confirms that the request(or at least part of it) did reach heroku and received a response. At this point it’s still not apparent to us why would this cause server to timeout. So I configured my desktop google chrome to use mimproxy, uploaded a photo and captured a request in this working scenario, which look like this:
+So indeed there is a response from the server, with a x-Runtime of 2.02 seconds to generate the response. This confirms that the request(or at least part of it) did reach heroku and received a response. At this point it’s still not apparent to us why would this cause server to timeout. So I configured my desktop google chrome to use mitmproxy, uploaded a photo and captured a request in this working scenario, which look like this:
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/desktop_chrome_upload_http.png" height="454" width="750">
 
-Haha! Now the difference became obvious. Notice with the desktop chrome request, the “photo[picture]” field in request body DOES contain data, which confirms that if there are data included in this field it would have been displayed by mitmproxy. 
+Aha! Now the difference became obvious. Notice with the desktop chrome request, the “photo[picture]” field in request body DOES contain data, which confirms that if there are data included in this field it would have been displayed by mitmproxy. 
 
 Looking back to the previous iOS request body, the entire “photo[picture]” field is completely empty, while under the header field “Content-Length”, it says “77646”. Content-Length describe the length of the file in bytes that should have been sent with the request. Basically, when the server saw Content-Length of 77646, it’s expecting the request body to contain 77646 bytes of data; however since the request body “photo[picture]” is empty and size of request data is smaller than the stated amount,, the server just hang around waiting for the rest until it times out. The server was saying to client: “Hey! You said you were gonna send 77646 bytes, but I only got 17482 bytes, where is the rest?” The request data was missing and the server received an incomplete request that it doesn't know how to process.
 
