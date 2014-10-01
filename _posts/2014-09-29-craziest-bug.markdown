@@ -69,7 +69,11 @@ We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitm
 
 Now I’m armed with a rather powerful tool which would give me much deeper visibility into the conversation between the iphone browser and my server, we’re ready to investigate!
 
-First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. My mitmproxy did capture the request, this is what the HTTP request looks like:
+First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. Mitmproxy would capture HTTP traffics, displaying the GET and POST requets as a list like so:
+
+<img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/request_list.png" height="212" width="750" alt="">
+
+Next I opened up the "POST" request that was sent by my iphone to Heroku server when uploading a photo, the request part look like this:
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/ios8.0_safari_upload_http.png" height="450" width="750" alt="">
 
