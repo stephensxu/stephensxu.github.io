@@ -5,7 +5,7 @@ date:   2014-09-29
 categories: technical
 ---
 
-I started learning how to program on Jan 14th, 2014 and have never written a single line of code before that. I met Jesse Farmer in May, and joined his workshops when he was just starting his venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a unique learning platform for web development and software engineering. Of all the black magics in programming, one of the most important lessons I've learned is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse have stressed the importance of this skill time after time. Today I want to tell you one of the craziest story along my journey.
+I started learning how to program on Jan 14th, 2014 and have never written a single line of code before that. I met Jesse Farmer in May, and joined his workshops when he was just starting his venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a unique learning platform for web development and software engineering. Of all the black magic in programming, one of the most important lessons I've learned is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse have stressed the importance of this skill time after time. Today I want to tell you one of the craziest story along my journey.
 
 I was building a website called <a href="http://couchfoodie.herokuapp.com" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
 
@@ -43,13 +43,13 @@ bench("photos_controller#create) { @photo = @kitchen.photos.build(photo_params) 
 {% endhighlight %}
 
 
-Tried to upload from iphone again. Nop; not only the server timed out as it had done before; none of the debugging statement in the bench instrumentation got printed out. That means those lines were never executed!
+Tried to upload from iphone again. Nope; not only the server timed out as it had done before; none of the debugging statement in the bench instrumentation got printed out. That means those lines were never executed!
 
 So now I know that the request data never got to my photos_controller and, most likely, it has never reached my web application at all. The timeout must have happened at the heroku web-server level.  What could have caused the request to choke up at heroku server, and how can I explain the redis errors? Is my iphone sending an unreadable request? To my understanding, a HTTP request sent from mobile browser should not be structurally different from a HTTP request sent from desktop browser.
 
-Next, I conducted experiments in varies different conditions:
+Next, I conducted experiments in various different conditions:
 
-- Thinking it might be my web server, I switched my web server from WEBrick to Thin: **No**
+- Thinking it might be my webserver, I switched my web server from WEBrick to Thin: **No**
 
 - Thinking it might be my Wi-fi network, I tried to upload with cellular LTE network: **No**
 
@@ -63,13 +63,13 @@ Before I went that route, I asked Jesse to perform the same upload action with s
 
 Jesse was on iOS 8.0.2 and I was on iOS 8.0. Later that night I tried with an iphone running on iOS 7, an ipad mini and a Samsung galaxy SIII; they all worked fine. It became apparent that the timeout problem was unique to my phone only. But which configuration could have caused the difference? What if other people have the same configuration with me and go through same experiences when uploading photo?
 
-We decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone HTTP traffics. Since Heroku logs wasn't providing me enough information on what went wrong, I need an alternative to access the request sent by my phone BEFORE it even reaches heroku.
+We decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone HTTP traffic. Since Heroku logs wasn't providing me enough information on what went wrong, I need an alternative to access the request sent by my phone BEFORE it even reaches heroku.
 
-We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitmproxy</a>. Mitmproxy is a "man-in-the-middle" proxy server. As its name suggested, mitmproxy allows me to insert one more layer of server between my iphone and heroku server. Once installed, I'd need to manually configure my iphone to connect to this proxy server over Wi-Fi. Mitmproxy will be running on my desktop on port 8080. It will capture all HTTP traffics going in and out of my iphone. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/" target="_blank">here</a>.
+We decided to use <a href="http://mitmproxy.org/index.html" target="_blank">mitmproxy</a>. Mitmproxy is a "man-in-the-middle" proxy server. As its name suggested, mitmproxy allows me to insert one more layer of server between my iphone and heroku server. Once installed, I'd need to manually configure my iphone to connect to this proxy server over Wi-Fi. Mitmproxy will be running on my desktop on port 8080. It will capture all HTTP traffic going in and out of my iphone. Mitmproxy is relatively easy to set up with brew and has a “somewhat intuitive” UI. Instructions of how to use it can be found <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/" target="_blank">here</a>.
 
 Now I’m armed with a rather powerful tool which would give me much deeper visibility into the conversation between the iphone browser and my server, we’re ready to investigate!
 
-First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. Mitmproxy would capture HTTP traffics, displaying the GET and POST request as a list like so:
+First step is to capture the request that’s causing error, one sent with my iphone. Now with a proxy server in the middle, the timeout situation is slightly different than previously, but both server and safari timed out nevertheless. Mitmproxy would capture HTTP traffic, displaying the GET and POST request as a list like so:
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/request_list.png" height="212" width="750" alt="">
 
