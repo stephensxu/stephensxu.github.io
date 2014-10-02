@@ -93,7 +93,7 @@ Now we’ve gotten to the bottom of the issue, we know that for some reason iOS 
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/ios_8.0.2_update_notes.png" height="382" width="750">
 
-Oh well. Had I read this upgrade notes before going through all these hustles, maybe it would have saved efforts; but if time reverse back I’d rather to go through this process again. This was a great opportunity for me to learn how to use a proxy server for debugging purpose and in-depth analysis of HTTP request and response cycle. Most importantly, this turned into one of the most memorable moment in my journey. I hope you find this useful as well.
+Oh well. Had I read this upgrade notes before going through all these hustles, maybe it would have saved efforts; but if time reverse back I’d rather go through this process again. For once I've diagnosed a bug in a core piece of software. More importantly, this turned into one of the most memorable moment in my journey. I hope you find this useful as well.
 
 Questions? Email me at stephensxub@gmail.com
 
