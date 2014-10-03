@@ -7,7 +7,7 @@ categories: technical
 
 Jan 14th 2014, I wrote the very first line of code in my life on <a href="http://www.codeacademy.com" target="_blank">Codeacademy</a>. A week after that, I spent almost 3 hours in conference room explaining to Ali, then my boss, why I no longer wanted to be a sales and decided to learn programming.
 
-Apr 8th, I found <a href="http://http://www.quora.com/Jesse-Farmer" target="_blank">Jesse Farmer</a>on<a href="http://http://www.quora.com/Jesse-Farmer" target="_blank">Quora</a>; I sent him an email inviting him for coffee, hoping he would teach me how to code.
+Apr 8th, I found <a href="http://www.quora.com/Jesse-Farmer" target="_blank">Jesse Farmer</a> on <a href="http://http://www.quora.com/Jesse-Farmer" target="_blank">Quora</a>; I sent him an email inviting him for coffee, hoping he would teach me how to code.
 
 May 13th, I drove up to <a href="http://en.wikipedia.org/wiki/San_Francisco" target="_blank">San Francisco</a> from <a href="http://en.wikipedia.org/wiki/San_Jose,_California" target="_blank">San Jose</a> to have lunch with Jesse. Since then I became one of the first students in his new venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a new way of learning web development and software engineering.
 
