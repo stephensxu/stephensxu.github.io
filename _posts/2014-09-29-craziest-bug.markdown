@@ -7,7 +7,7 @@ categories: technical
 
 I started learning how to program on Jan 14th, 2014 and have never written a single line of code before that. I met Jesse Farmer in May, and joined his workshops when he was just starting his venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a unique learning platform for web development and software engineering. Of all the black magic in programming, one of the most important lessons I've learned is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse have stressed the importance of this skill time after time. Today I want to tell you one of the craziest story along my journey.
 
-I was building a website called <a href="http://couchfoodie.herokuapp.com" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
+I was building a website called <a href="http://couchfoodie.io" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
 
 Two days ago I started to test photo uploading feature on my iphone5 by browsing the site with iOS Safari and found a problem where the server always times out with photo upload:
 
