@@ -1,15 +1,21 @@
 ---
 layout: post
-title:  My craziest bug in web development (and the funniest one)
+title:  My craziest bug
 date:   2014-09-29
 categories: technical
 ---
 
-I started learning how to program on Jan 14th, 2014 and have never written a single line of code before that. I met Jesse Farmer in May, and joined his workshops when he was just starting his venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a unique learning platform for web development and software engineering. Of all the black magic in programming, one of the most important lessons I've learned is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse have stressed the importance of this skill time after time. Today I want to tell you one of the craziest story along my journey.
+Jan 14th 2014, I wrote the very first line of code in my life on <a href="http://www.codeacademy.com" target="_blank">Codeacademy</a>. A week after that, I spent almost 3 hours in conference room explaining to Ali, then my boss, why I no longer wanted to be a sales and decided to learn programming.
 
-I was building a website called <a href="http://couchfoodie.io" target="_blank">Couchfoodie</a>, a platform that allows people to socialize with cooking. One of the features allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
+Apr 8th 2014, I found <a href="http://http://www.quora.com/Jesse-Farmer" target="_blank">Jesse Farmer</a>on<a href="http://http://www.quora.com/Jesse-Farmer" target="_blank">Quora</a>; I sent him an email inviting him for coffee, hoping he would teach me how to code.
 
-Two days ago I started to test photo uploading feature on my iphone5 by browsing the site with iOS Safari and found a problem where the server always times out with photo upload:
+May 13th 2014, I drove up to <a href="http://en.wikipedia.org/wiki/San_Francisco" target="_blank">San Francisco</a> from <a href="http://en.wikipedia.org/wiki/San_Jose,_California" target="_blank">San Jose</a> to have lunch with Jesse. Since then I became one of the first students in his new venture <a href="http://codeunion.io" target="_blank">CodeUnion</a>, a new way of learning web development and software engineering.
+
+Of all the things I learned with CodeUnion, one of the most important lessons is <a href="http://blog.codeunion.io/2014/09/03/teaching-novices-how-to-debug-code/" target="_blank">how to debug my code</a>, since Jesse has stressed the importance of this skill time after time. Today I want to tell you a crazy story along my journey.
+
+I was building <a href="http://couchfoodie.io" target="_blank">Couchfoodie.io</a>, a platform that allows people to socialize with cooking. One important feature allows user to upload photos of their food to display on the site. It’s built with Ruby on Rails, using Amazon S3 for photo storage; carrierwave, sidekiq and Redis-To-Go for photo processing. I used Heroku for hosting, with one web dyno and one worker dyno.
+
+Two days ago I started testing photo upload on my iphone5 by browsing the site with iOS Safari, I noticed that the server consistently times out when uploading:
 
 <img src="https://s3-us-west-1.amazonaws.com/stephensxu.github.io/my_craziest_bug/error.jpg" height="300" width="170" alt="">
 
@@ -19,7 +25,7 @@ In my server logs, it would display a “code=H15 dec=’Idle connection” erro
 
 In a working scenario, the web dyno should have received the uploading and then unload the process to worker dyno for processing. However none of these server responded, instead it was heroku router.
 
-First I thought the server might have timed out due to file size was too big. So I conducted experiments with a 45KB tiny photo on my home wi-fi connection.
+First I thought the server might have timed out due to size of the file. So I conducted experiments with a 45KB tiny photo on my home Wi-Fi connection.
 
 Nope, still same result. That’s weird! I was certain that the same photo, uploading with same network connection worked fine with desktop chrome uploading. In order to find out at what stage did the server timeout, I wrapped my photo#create method in photos_controller with a bench method like so:
 
@@ -51,7 +57,7 @@ Next, I conducted experiments in various different conditions:
 
 - Thinking it might be my webserver, I switched my web server from WEBrick to Thin: **No**
 
-- Thinking it might be my Wi-fi network, I tried to upload with cellular LTE network: **No**
+- Thinking it might be my Wi-Fi network, I tried to upload with cellular LTE network: **No**
 
 - Thinking it might be Safari, I tried iOS chrome browser upload: small photo **Yes**, Large photo **No**
 
@@ -59,9 +65,9 @@ Finally, I tried to upload photo with the xcode iOS simulator Safari browser. Ev
 
 Those inconsistent results made it really hard to isolate the problem. It seems I'd have to intercept requests sent by my iphone and look at header and body of the request to find some clues.
 
-Before I went that route, I asked Jesse to perform the same upload action with same 45KB photo with his phone. Surprisingly, everything worked fine on his phone, with different sized photos and for both wi-fi connection and LTE.
+Before I went that route, I asked Jesse to perform the same upload action with same 45KB photo with his phone. Surprisingly, everything worked fine on his phone, with different sized photos and for both Wi-Fi connection and LTE.
 
-Jesse was on iOS 8.0.2 and I was on iOS 8.0. Later that night I tried with an iphone running on iOS 7, an ipad mini and a Samsung galaxy SIII; they all worked fine. It became apparent that the timeout problem was unique to my phone only. But which configuration could have caused the difference? What if other people have the same configuration with me and go through same experiences when uploading photo?
+Jesse was on iOS 8.0.2 and I was on iOS 8.0. Later that night I tried with an iphone running on iOS 7, an ipad mini and a Samsung galaxy SIII; they all worked fine. It became apparent that the timeout problem was unique to my phone only. But which configuration could have caused the difference? What if other people have the same configuration with me and go through same experiences?
 
 We decided to go ahead and set up a proxy server on my desktop so we can intercept my iphone HTTP traffic. Since Heroku logs wasn't providing me enough information on what went wrong, I need an alternative to access the request sent by my phone BEFORE it even reaches heroku.
 
